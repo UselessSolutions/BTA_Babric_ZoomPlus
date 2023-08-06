@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
-  "version": "${version}",
+  "id": "zoomplus",
+  "version": "1.0.0",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Zoom Plus",
+  "description": "Ability to change fov while zooming.",
   "authors": [
-    "Turnip Labs"
+    "Useless"
   ],
   "contact": {
     "homepage": "",
@@ -18,11 +18,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-        "turniplabs.examplemod.ExampleMod"
+      "useless.zoomplus.ZoomPlus"
     ]
   },
   "mixins": [
-      "examplemod.mixins.json"
+      "zoomplus.mixins.json"
   ],
 
   "depends": {
