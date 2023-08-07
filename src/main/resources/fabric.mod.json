@@ -1,15 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "zoomplus",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "name": "Zoom Plus",
   "description": "Ability to change fov while zooming.",
   "authors": [
     "Useless"
   ],
+  "icon": "icon.png",
   "contact": {
-    "homepage": "",
+    "homepage": "https://github.com/UselessBullets?tab=repositories",
     "sources": ""
   },
 
