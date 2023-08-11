@@ -4,6 +4,7 @@
     "package": "useless.zoomplus.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+        "invPlayerMixin",
         "zoomModMixin"
     ],
     "client": [

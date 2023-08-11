@@ -11,6 +11,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import useless.zoomplus.ZoomPlus;
 
 @Mixin(WorldRenderer.class)
 public class zoomModMixin{
@@ -33,7 +37,11 @@ public class zoomModMixin{
     @Shadow
     private int rendererUpdateCount;
 
-
+    @Inject(method = "<init>()V", at = @At("TAIL"))
+    public void init(CallbackInfo info){
+        ZoomPlus.LOGGER.info("Injection Successful");
+        ZoomPlus.mc = mc;
+    }
     /**
      * @author Useless
      * @reason Adding zoom modification
