@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "zoomplus",
-  "version": "1.0.1",
+  "version": "1.1.0",
 
   "name": "Zoom Plus",
   "description": "Ability to change fov while zooming.",
