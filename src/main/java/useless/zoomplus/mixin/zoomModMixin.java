@@ -37,10 +37,10 @@ public class zoomModMixin{
     @Shadow
     private int rendererUpdateCount;
 
-    @Inject(method = "<init>()V", at = @At("TAIL"))
+    @Inject(method = "<init>(Lnet/minecraft/client/Minecraft;)V", at = @At("TAIL"))
     public void init(CallbackInfo info){
         ZoomPlus.LOGGER.info("Injection Successful");
-        ZoomPlus.mc = mc;
+        ZoomPlus.mc = this.mc;
     }
     /**
      * @author Useless
