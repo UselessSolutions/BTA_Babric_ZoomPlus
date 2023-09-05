@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "zoomplus",
-  "version": "1.1.1",
+  "version": "2.0.0",
 
   "name": "Zoom Plus",
   "description": "Ability to change fov while zooming.",
@@ -10,7 +10,7 @@
   ],
   "icon": "icon.png",
   "contact": {
-    "homepage": "https://github.com/UselessBullets?tab=repositories",
+    "homepage": "https://github.com/UselessBullets/BTA_Babric_ZoomPlus",
     "sources": ""
   },
 
