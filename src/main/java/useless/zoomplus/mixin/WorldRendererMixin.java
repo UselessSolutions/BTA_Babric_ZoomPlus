@@ -17,6 +17,9 @@ public class WorldRendererMixin {
     @Unique
     private int zoomOffset = 0;
 
+    @Unique
+    private boolean isPressedThisFrame = false;
+
     @Redirect(method = "setupCameraTransform(F)V", at = @At(value = "INVOKE", target = "Lorg/lwjgl/util/glu/GLU;gluPerspective(FFFF)V"))
     private void modZoom(float fovy, float aspect, float zNear, float zFar){
         float originalFov = this.getFOVModifier(0, true);
@@ -25,6 +28,11 @@ public class WorldRendererMixin {
         float fovDefaultZoom = originalFov * 0.45f;
 
         int zoomRadius = 2000;
+
+        if (!isPressedThisFrame){
+            Mouse.getDWheel();
+        }
+        isPressedThisFrame = this.mc.gameSettings.keyZoom.isPressed();
 
         if (this.mc.gameSettings.keyZoom.isPressed() && this.mc.currentScreen == null) {
             zoomOffset -= Mouse.getDWheel();
