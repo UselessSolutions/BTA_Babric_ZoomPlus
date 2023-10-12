@@ -20,9 +20,9 @@ import useless.zoomplus.ZoomPlus;
 @Mixin(value = WorldRenderer.class, remap = false)
 public class WorldRendererMixin {
     @Unique
-    private Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
+    private final Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
     @Unique
-    private GameSettings gameSettings = mc.gameSettings;
+    private final GameSettings gameSettings = mc.gameSettings;
     @Shadow
     private float field_22222_x = 0.0f;
     @Shadow
