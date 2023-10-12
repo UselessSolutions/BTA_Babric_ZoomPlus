@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "zoomplus",
-  "version": "2.0.1",
+  "version": "${version}",
 
   "name": "Zoom Plus",
   "description": "Ability to change fov while zooming.",
@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "useless.zoomplus.ZoomPlus"
+    ],
+    "modmenu": [
+      "useless.zoomplus.ModMenuModule"
     ]
   },
   "mixins": [
@@ -30,5 +33,9 @@
     "fabricloader": ">=0.13.3"
   },
   "suggests": {
+    "modmenu": ">=2.0.2"
+  },
+  "custom": {
+    "modmenu:clientsideOnly": true
   }
 }
