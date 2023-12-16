@@ -3,9 +3,7 @@ package useless.zoomplus.mixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.camera.EntityCamera;
 import org.lwjgl.input.Mouse;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,10 +17,10 @@ public class EntityCameraMixin {
     @Unique
     private boolean isPressedThisFrame = false;
     @Unique
-    private Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
+    private final Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
     @Inject(method = "getFov()D", at = @At("HEAD"), cancellable = true)
     private void modFov(CallbackInfoReturnable<Double> cir){
-        double defaultFOV = (this.mc.gameSettings.FoV.value).floatValue() * 100 + 30;
+        double defaultFOV = this.mc.gameSettings.FoV.value * 100 + 30;
         int zoomRadius = 2000;
 
         if (!isPressedThisFrame && this.mc.currentScreen == null){

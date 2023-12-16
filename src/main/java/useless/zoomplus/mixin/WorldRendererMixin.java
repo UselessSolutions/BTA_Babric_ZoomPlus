@@ -2,17 +2,14 @@ package useless.zoomplus.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.option.GameSettings;
-import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.render.camera.CameraUtil;
-import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityLiving;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import useless.zoomplus.ZoomPlus;
@@ -27,6 +24,10 @@ public class WorldRendererMixin {
     private float field_22222_x = 0.0f;
     @Shadow
     private float field_22221_y = 0.0f;
+    @Shadow public boolean zooming;
+    @Unique
+    public boolean ogZoom;
+
     @Inject(method = "getFOVModifier(FZ)F", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void capFOV(float renderPartialTicks, boolean isModifiedByFOV, CallbackInfoReturnable<Float> cir, EntityLiving entityliving, float f1){
         if (isModifiedByFOV && this.mc.gameSettings.keyZoom.isPressed() && this.mc.currentScreen == null){
@@ -39,8 +40,13 @@ public class WorldRendererMixin {
             cir.setReturnValue(finalFov);
         }
     }
-    @Redirect(method = "setupCameraTransform(F)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;isPressed()Z"))
-    private boolean disableDefaultZoom(KeyBinding instance){
-        return false;
+    @Inject(method = "setupCameraTransform(F)V", at = @At("HEAD"))
+    private void disableDefaultZoom(float partialTick, CallbackInfo ci){
+        ogZoom = zooming;
+        zooming = false;
+    }
+    @Inject(method = "setupCameraTransform(F)V", at = @At("TAIL"))
+    private void reEnableDefaultZoom(float partialTick, CallbackInfo ci){
+        zooming = ogZoom;
     }
 }

@@ -1,20 +1,26 @@
 package useless.zoomplus;
 
+
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.options.GuiOptionsPageOptionBase;
+import net.minecraft.client.gui.options.GuiOptions;
+import net.minecraft.client.gui.options.components.FloatOptionComponent;
+import net.minecraft.client.gui.options.components.OptionsCategory;
+import net.minecraft.client.gui.options.data.OptionsPage;
 import net.minecraft.client.option.GameSettings;
 
-public class GuiOptionsPageZoomPlus extends GuiOptionsPageOptionBase {
-    public GuiOptionsPageZoomPlus(GuiScreen parent, GameSettings settings) {
-        super(parent, settings);
-        IZoomSettings iZoomSettings = (IZoomSettings)settings;
-        this.addOptionsCategory("options.zoomplus.category", iZoomSettings.getMinFov(), iZoomSettings.getMaxFov());
+public class GuiOptionsPageZoomPlus extends GuiScreen {
+    public static GameSettings gameSettings = Minecraft.getMinecraft(Minecraft.class).gameSettings;
+    public static IZoomSettings modSettings = (IZoomSettings) gameSettings;
+    public static final OptionsPage zoomOptions = new OptionsPage("options.zoomplus.category")
+            .withComponent(new OptionsCategory("options.zoomplus.category")
+                    .withComponent(new FloatOptionComponent(modSettings.getMaxFov()))
+                    .withComponent(new FloatOptionComponent(modSettings.getMinFov())));
+    static {
+//        OptionsPages.register(zoomOptions);
     }
-    public void drawScreen(int x, int y, float renderPartialTicks) {
-        super.drawScreen(x,y,renderPartialTicks);
-        if (!ZoomPlus.halpPresent){
-            fontRenderer.drawString("Text might not translate properly without HalpLibe!", 10, 65, 0xFFFFFF);
-        }
-
+    public static GuiOptions createGui(GuiScreen parent){
+        return new GuiOptions(parent, ((Minecraft) FabricLoader.getInstance().getGameInstance()).gameSettings, zoomOptions);
     }
 }

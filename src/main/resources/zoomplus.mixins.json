@@ -7,8 +7,8 @@
   ],
   "client": [
     "EntityCameraMixin",
-    "invPlayerMixin",
     "GameSettingsMixin",
+    "invPlayerMixin",
     "WorldRendererMixin"
   ],
   "injectors": {
